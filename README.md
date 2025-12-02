@@ -1,83 +1,78 @@
-# АрхМаршрут - PWA Application
+# АрхМаршрут - GitHub Pages Deployment
 
-## Ветка lab6-pwa
+## Ветка lab6-pages
 
-Progressive Web Application для работы с археологическими артефактами.
+Автоматический деплой на GitHub Pages с PWA, Redux и адаптивным дизайном.
+
+## URL приложения
+
+https://mamikulin.github.io/rip_frontend/
 
 ## Функционал
 
-### Redux Toolkit
-- Хранение фильтров поиска в Redux store
-- Сохранение состояния между переходами
-- Используйте Redux DevTools для отладки
+- ✅ PWA (можно установить как приложение)
+- ✅ Redux для хранения фильтров
+- ✅ Адаптивный дизайн (1-4 колонки)
+- ✅ Service Worker для offline режима
+- ✅ Работа с mock данными
 
-### PWA Features
-- Установка как приложение (Add to Home Screen)
-- Offline режим через Service Worker
-- Кэширование API запросов
-- Быстрая загрузка
+## Автодеплой
 
-### Адаптивность
-- **Mobile (до 640px)**: 1 колонка карточек
-- **Tablet (641-1024px)**: 2 колонки
-- **Desktop Small (1025-1280px)**: 3 колонки  
-- **Desktop Large (1281px+)**: 4 колонки
+При пуше в ветку `lab6-pages` автоматически:
+1. Собирается production build
+2. Деплоится на GitHub Pages
+3. Доступно по ссылке выше
 
-## Запуск локально (БЕЗ BUILD)
+## Локальная сборка
 
 ```bash
 npm install
-npm run dev
+npm run build
 ```
 
-Откройте http://localhost:5173
+Результат в папке `dist/`
 
-## Тестирование PWA
+## Настройка GitHub Pages
 
-1. Откройте в Chrome DevTools → Application → Service Workers
-2. Проверьте регистрацию Service Worker
-3. Включите Offline mode и перезагрузите страницу
-4. Установите PWA: нажмите на иконку установки в адресной строке
+1. Перейдите в Settings → Pages
+2. Source: GitHub Actions
+3. Workflow запустится автоматически
 
-## Redux Store
+## Конфигурация
 
-**Фильтры:**
-- `searchQuery` - текст поиска
-- `productionCenter` - центр производства
-- `isActive` - статус активности
-
-**Actions:**
-- `setSearchQuery(string)` - установить поисковый запрос
-- `setProductionCenter(string)` - установить центр
-- `setIsActive(boolean)` - установить статус
-- `resetFilters()` - сбросить все фильтры
-
-## Адаптивные breakpoints
-
-```css
-/* Mobile */
-@media (max-width: 640px) { ... }
-
-/* Tablet */
-@media (min-width: 641px) and (max-width: 1024px) { ... }
-
-/* Desktop Small */
-@media (min-width: 1025px) and (max-width: 1280px) { ... }
-
-/* Desktop Large */
-@media (min-width: 1281px) { ... }
+**vite.config.ts:**
+```typescript
+base: '/rip_frontend/'
 ```
 
-## Структура
+**GitHub Actions:**
+- `.github/workflows/deploy.yml`
+- Триггер: push в lab6-pages
+- Build: Node.js 20 + npm ci + npm run build
 
-- `/src/store` - Redux store и slices
-- `/src/store/hooks.ts` - Typed Redux hooks
-- `vite.config.ts` - PWA configuration
-- Service Worker генерируется автоматически
+## Демонстрация
 
-## Демонстрация для лаб.работы
+1. Открыть на компьютере GitHub Pages
+2. Показать работу с бэкендом (если запущен локально)
+3. Открыть на телефоне → установить PWA
+4. Применить фильтр → перейти на главную → вернуться
+5. Адаптивный режим браузера → изменить ширину
+6. Показать код: количество колонок в Catalog.css
 
-1. Открыть на телефоне → сохранить PWA
-2. Применить фильтр → перейти на главную → вернуться (фильтр сохранён)
-3. Перейти в адаптивный режим браузера → поменять ширину
-4. Показать в коде настройки колонок в CSS файлах
+## Структура проекта
+
+```
+dist/                 # Собранный фронтенд
+├── index.html
+├── assets/
+└── manifest.webmanifest
+
+.github/
+└── workflows/
+    └── deploy.yml    # GitHub Actions workflow
+
+src/
+├── store/            # Redux store
+├── pages/            # React компоненты
+└── services/         # API сервисы
+```
