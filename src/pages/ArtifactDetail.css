@@ -1,0 +1,20 @@
+.pageTitle .path {
+	font-size: 14px;
+	color: var(--text-medium);
+	margin-bottom: 8px;
+}
+
+.pageTitle .filterTag {
+	margin-top: 8px;
+	font-size: 14px;
+	color: var(--text-medium);
+	background: var(--accent-yellow);
+	padding: 6px 8px;
+	border-radius: 4px;
+	display: inline-block;
+}
+
+.content {
+	margin-top: 24px;
+}
+
