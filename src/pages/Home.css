@@ -89,3 +89,37 @@
   font-weight: 600;
   margin: 0;
 }
+
+/* Адаптивность для Home */
+@media (max-width: 640px) {
+  .home-page {
+    padding: 20px 20px 40px;
+  }
+  
+  .info-card {
+    padding: 20px;
+  }
+  
+  .info-card h2 {
+    font-size: 22px;
+  }
+  
+  .info-card p {
+    font-size: 14px;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .home-page {
+    padding: 30px 30px 60px;
+  }
+  
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

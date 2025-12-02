@@ -79,3 +79,56 @@
 	min-height: 44px; /* reserve space for 2 lines */
 }
 
+/* Адаптивность для разных экранов */
+
+/* Mobile: 1 колонка */
+@media (max-width: 640px) {
+	.searchContent {
+		padding: 0 20px;
+	}
+	
+	.commodiesList {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	
+	.artifact {
+		max-width: 100%;
+	}
+	
+	.image {
+		height: 200px;
+	}
+	
+	.info {
+		padding: 15px;
+	}
+}
+
+/* Tablet: 2 колонки */
+@media (min-width: 641px) and (max-width: 1024px) {
+	.commodiesList {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 25px;
+	}
+	
+	.searchContent {
+		padding: 0 30px;
+	}
+}
+
+/* Desktop Small: 3 колонки */
+@media (min-width: 1025px) and (max-width: 1280px) {
+	.commodiesList {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 30px;
+	}
+}
+
+/* Desktop Large: 4 колонки */
+@media (min-width: 1281px) {
+	.commodiesList {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 30px;
+	}
+}

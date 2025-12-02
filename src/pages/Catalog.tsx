@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import { artifactService } from '../services/artifactService';
 import type { Artifact } from '../types/artifact';
 import defaultImg from '../assets/default.png';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { setSearchQuery } from '../store/filtersSlice';
 import './Catalog.css';
 
 
 const Catalog = () => {
   const [artifacts, setArtifacts] = useState<Artifact[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useAppDispatch();
+  const searchQuery = useAppSelector((state) => state.filters.searchQuery);
 
   const getImageUrl = (url: string | null) => {
     if (!url) return defaultImg;
@@ -70,7 +73,7 @@ const Catalog = () => {
                 name="query"
                 placeholder="Поиск по каталогу"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => dispatch(setSearchQuery(e.target.value))}
               />
               <button type="submit" className="search-btn">Искать</button>
             </div>

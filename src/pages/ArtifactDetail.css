@@ -18,3 +18,54 @@
 	margin-top: 24px;
 }
 
+/* Адаптивность для ArtifactDetail */
+
+/* Mobile: вертикальный layout */
+@media (max-width: 768px) {
+	.artifact-detail-overview {
+		flex-direction: column !important;
+		gap: 16px !important;
+		padding: 16px !important;
+	}
+	
+	.artifact-detail-overview .image {
+		width: 100% !important;
+		height: 250px !important;
+	}
+	
+	.artifact-detail-overview .info {
+		padding: 0 !important;
+	}
+	
+	.artifact-detail-overview .info h2 {
+		font-size: 16px !important;
+	}
+	
+	.artifact-detail-overview .info h3 {
+		font-size: 18px !important;
+	}
+	
+	.description {
+		padding: 16px !important;
+	}
+	
+	.description h3 {
+		font-size: 20px !important;
+	}
+	
+	.description p {
+		font-size: 15px !important;
+	}
+}
+
+/* Tablet: компактный горизонтальный layout */
+@media (min-width: 769px) and (max-width: 1024px) {
+	.artifact-detail-overview {
+		gap: 20px !important;
+	}
+	
+	.artifact-detail-overview .image {
+		width: 250px !important;
+		height: 250px !important;
+	}
+}
