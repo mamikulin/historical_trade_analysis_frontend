@@ -1,7 +1,8 @@
 import type { Artifact, ArtifactFilters } from '../types/artifact';
 import { mockArtifacts } from '../data/mockArtifacts';
+import { API_CONFIG } from '../config';
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = API_CONFIG.BASE_URL;
 
 class ArtifactService {
   async getAll(filters?: ArtifactFilters): Promise<Artifact[]> {
