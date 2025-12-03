@@ -24,6 +24,7 @@ class ArtifactService {
       const queryString = params.toString();
       const url = `${API_BASE_URL}/artifacts${queryString ? `?${queryString}` : ''}`;
       
+      console.log('[ArtifactService] Fetching from:', url);
       const response = await fetch(url);
       
       if (!response.ok) {
