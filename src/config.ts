@@ -1,24 +1,21 @@
 // Configuration for different environments
 // Behavior:
 // - If `VITE_API_BASE_URL` is provided (recommended), use it.
-// - If running in a browser on localhost, use the dev proxy path `/api`.
-// - Otherwise (packaged/Tauri), fall back to a sensible LAN IP so the app
-//   can reach the backend from the native wrapper.
+// - In development mode (npm run dev), use the dev proxy path `/api`.
+// - Otherwise (production/Tauri), use direct IP address.
 const DEFAULT_LOCAL_IP = '192.168.1.69'; // Replace with your machine IP if different
 
 const inferBaseUrl = () => {
   const envUrl = import.meta.env.VITE_API_BASE_URL;
   if (envUrl) return envUrl;
 
-  // In dev (served from localhost), the Vite proxy handles `/api`.
-  if (typeof window !== 'undefined') {
-    const host = window.location.hostname;
-    if (host === 'localhost' || host === '127.0.0.1') {
-      return '/api';
-    }
+  // In dev mode, the Vite proxy handles `/api`.
+  // import.meta.env.DEV is true only during `npm run dev`
+  if (import.meta.env.DEV) {
+    return '/api';
   }
 
-  // Packaged app (file://) or other hosts: use LAN IP to reach backend.
+  // Production build or Tauri: use direct IP to reach backend.
   return `http://${DEFAULT_LOCAL_IP}:8000/api`;
 };
 
@@ -28,7 +25,11 @@ export const API_CONFIG = {
 };
 
 // Log the configuration for debugging
-console.log('[Config] API_CONFIG:', API_CONFIG);
+console.log('[Config] Environment variables:');
+console.log('[Config]   VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL);
+console.log('[Config]   VITE_IMAGE_SERVER:', import.meta.env.VITE_IMAGE_SERVER);
+console.log('[Config]   DEV mode:', import.meta.env.DEV);
+console.log('[Config] Resolved API_CONFIG:', API_CONFIG);
 console.log('[Config] window.location:', typeof window !== 'undefined' ? window.location.href : 'SSR/Node');
 
 // Example: For local network testing, set in `.env` (preferred):

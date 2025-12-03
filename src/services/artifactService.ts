@@ -4,6 +4,8 @@ import { API_CONFIG } from '../config';
 
 const API_BASE_URL = API_CONFIG.BASE_URL;
 
+console.log('[ArtifactService] Initialized with API_BASE_URL:', API_BASE_URL);
+
 class ArtifactService {
   async getAll(filters?: ArtifactFilters): Promise<Artifact[]> {
     try {
@@ -27,15 +29,19 @@ class ArtifactService {
       console.log('[ArtifactService] Fetching from:', url);
       const response = await fetch(url);
       
+      console.log('[ArtifactService] Response status:', response.status);
+      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       let data = await response.json();
       
+      console.log('[ArtifactService] Received data count:', data.length);
       return data;
     } catch (error) {
-      console.warn('Failed to fetch from backend, using mock data:', error);
+      console.error('[ArtifactService] Failed to fetch from backend:', error);
+      console.log('[ArtifactService] Using mock data');
       return this.getMockData(filters);
     }
   }

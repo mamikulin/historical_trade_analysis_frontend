@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { artifactService } from '../services/artifactService';
 import type { Artifact } from '../types/artifact';
 import defaultImg from '../assets/default.png';
+import { API_CONFIG } from '../config';
 import './Catalog.css';
 
 
@@ -13,13 +14,25 @@ const Catalog = () => {
 
   const getImageUrl = (url: string | null | undefined) => {
     if (!url) return defaultImg;
-    // Convert absolute URLs to relative for proxy
-    const absolutePattern = /^https?:\/\/localhost:\d+\//;
-    if (absolutePattern.test(url)) {
-      const relativeUrl = url.replace(absolutePattern, '/');
-      console.log('Converting image URL:', url, '->', relativeUrl);
-      return relativeUrl;
+    
+    // In dev mode with proxy, convert localhost URLs to relative paths
+    if (import.meta.env.DEV) {
+      const absolutePattern = /^https?:\/\/localhost:\d+\//;
+      if (absolutePattern.test(url)) {
+        const relativeUrl = url.replace(absolutePattern, '/');
+        console.log('[Catalog] Converting image URL:', url, '->', relativeUrl);
+        return relativeUrl;
+      }
     }
+    
+    // In production, replace localhost with actual image server
+    const localhostPattern = /^https?:\/\/localhost:\d+/;
+    if (localhostPattern.test(url)) {
+      const fixedUrl = url.replace(localhostPattern, API_CONFIG.IMAGE_SERVER);
+      console.log('[Catalog] Fixing image URL:', url, '->', fixedUrl);
+      return fixedUrl;
+    }
+    
     return url;
   };
 
