@@ -11,7 +11,7 @@ const Catalog = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const getImageUrl = (url: string | null) => {
+  const getImageUrl = (url: string | null | undefined) => {
     if (!url) return defaultImg;
     // Convert absolute URLs to relative for proxy
     const absolutePattern = /^https?:\/\/localhost:\d+\//;
