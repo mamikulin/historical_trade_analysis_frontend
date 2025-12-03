@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface FiltersState {
   searchQuery: string;
@@ -6,9 +6,20 @@ interface FiltersState {
   isActive?: boolean;
 }
 
-const initialState: FiltersState = {
-  searchQuery: '',
+// Load initial state from localStorage
+const loadState = (): FiltersState => {
+  try {
+    const serializedState = localStorage.getItem('filters');
+    if (serializedState === null) {
+      return { searchQuery: '' };
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return { searchQuery: '' };
+  }
 };
+
+const initialState: FiltersState = loadState();
 
 const filtersSlice = createSlice({
   name: 'filters',

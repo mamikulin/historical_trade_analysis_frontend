@@ -12,9 +12,9 @@ const Catalog = () => {
   const [artifacts, setArtifacts] = useState<Artifact[]>([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useAppDispatch();
-  const searchQuery = useAppSelector((state) => state.filters.searchQuery);
+  const searchQuery = useAppSelector((state: any) => state.filters.searchQuery);
 
-  const getImageUrl = (url: string | null) => {
+  const getImageUrl = (url: string | null | undefined) => {
     if (!url) return defaultImg;
     // Convert absolute URLs to relative for proxy
     const absolutePattern = /^https?:\/\/localhost:\d+\//;

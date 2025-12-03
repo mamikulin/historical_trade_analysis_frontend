@@ -7,7 +7,7 @@ import ArtifactDetail from './pages/ArtifactDetail';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/rip_frontend">
       <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
         <Header />
         <Breadcrumbs />
