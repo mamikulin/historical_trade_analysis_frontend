@@ -31,7 +31,6 @@ const Catalog = () => {
     try {
       const data = await artifactService.getAll({
         query: searchQuery || undefined,
-        is_active: true
       });
       setArtifacts(data);
     } catch (error) {

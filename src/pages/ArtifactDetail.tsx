@@ -95,10 +95,6 @@ const ArtifactDetail = () => {
               <h2 style={{ fontSize: '18px' }}>Центр производства:</h2>
               <h3 style={{ fontSize: '20px' }}>{artifact.production_center}</h3>
             </div>
-            {/* <div className="origin" style={{ marginTop: '16px' }}>
-              <h2 style={{ fontSize: '18px' }}>Статус:</h2>
-              <h3 style={{ fontSize: '20px' }}>{artifact.is_active ? 'Активен' : 'Неактивен'}</h3>
-            </div> */}
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/rip_frontend/',
+  base: 'historical_trade_analysis_frontend',
   plugins: [
     react(),
     VitePWA({

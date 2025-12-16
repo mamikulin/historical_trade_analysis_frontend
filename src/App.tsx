@@ -7,7 +7,7 @@ import ArtifactDetail from './pages/ArtifactDetail';
 
 function App() {
   return (
-    <Router basename="/rip_frontend">
+    <Router basename="/historical_trade_analysis_frontend">
       <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
         <Header />
         <Breadcrumbs />

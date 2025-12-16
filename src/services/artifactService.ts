@@ -8,10 +8,6 @@ class ArtifactService {
     try {
       const params = new URLSearchParams();
       
-      if (filters?.is_active !== undefined) {
-        params.append('is_active', filters.is_active.toString());
-      }
-      
       if (filters?.production_center) {
         params.append('production_center', filters.production_center);
       }
@@ -94,9 +90,6 @@ class ArtifactService {
   private getMockData(filters?: ArtifactFilters): Artifact[] {
     let data = [...mockArtifacts];
     
-    if (filters?.is_active !== undefined) {
-      data = data.filter(a => a.is_active === filters.is_active);
-    }
     
     if (filters?.production_center) {
       data = data.filter(a => a.production_center === filters.production_center);
