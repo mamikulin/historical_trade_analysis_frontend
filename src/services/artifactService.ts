@@ -1,7 +1,7 @@
 import type { Artifact, ArtifactFilters } from '../types/artifact';
 import { mockArtifacts } from '../data/mockArtifacts';
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'https://68846b064817.ngrok-free.app/api';
 
 class ArtifactService {
   async getAll(filters?: ArtifactFilters): Promise<Artifact[]> {
@@ -19,13 +19,25 @@ class ArtifactService {
       const queryString = params.toString();
       const url = `${API_BASE_URL}/artifacts${queryString ? `?${queryString}` : ''}`;
       
-      const response = await fetch(url);
+
+      const response = await fetch(url, {
+        mode: 'cors',
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      });
+
+      console.log('Response:', url, response);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      let data = await response.json();
+      const text = await response.text();
+      console.log('Raw response text:', text);
+      
+      let data = JSON.parse(text);
+      console.log('Parsed artifacts:', data);
       
       return data;
     } catch (error) {
@@ -36,7 +48,12 @@ class ArtifactService {
 
   async getById(id: number): Promise<Artifact> {
     try {
-      const response = await fetch(`${API_BASE_URL}/artifacts/${id}`);
+      const response = await fetch(`${API_BASE_URL}/artifacts/${id}`, {
+        mode: 'cors',
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      });
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -58,8 +75,10 @@ class ArtifactService {
     try {
       const response = await fetch(`${API_BASE_URL}/artifacts/${artifactId}/add-to-analysis`, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
         },
         credentials: 'include',
         body: JSON.stringify({ quantity, comment: '' })
