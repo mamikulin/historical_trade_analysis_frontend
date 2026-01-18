@@ -1,0 +1,54 @@
+.cart {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: var(--primary-color);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    z-index: 100; 
+}
+
+.cart:hover {
+    transform: scale(1.1);
+}
+
+.cart img {
+    width: 36px;
+    height: 36px;
+    filter: brightness(0) invert(1);
+}
+
+.cart.inactive {
+    opacity: 0.6; 
+    cursor: default;
+    pointer-events: none;
+}
+
+.cart.inactive:hover {
+    transform: none;
+}
+
+.cart .analysedCount {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cart.inactive .analysedCount {
+    display: none;
+}

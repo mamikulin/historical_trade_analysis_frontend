@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { artifactService } from '../services/artifactService';
 import type { Artifact } from '../types/artifact';
 import defaultImg from '../assets/default.png';
+import Cart from '../components/cart';
 import './Catalog.css';
 
 
@@ -126,6 +127,7 @@ const Catalog = () => {
           </div>
         )}
       </main>
+      <Cart />
     </>
   );
 };
