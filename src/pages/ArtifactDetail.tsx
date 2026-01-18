@@ -13,12 +13,11 @@ const ArtifactDetail = () => {
 
   const getImageUrl = (url: string | null | undefined) => {
     if (!url) return defaultImg;
-    // Convert absolute URLs to relative for proxy
-    const absolutePattern = /^https?:\/\/localhost:\d+\//;
-    if (absolutePattern.test(url)) {
-      const relativeUrl = url.replace(absolutePattern, '/');
-      console.log('Converting image URL:', url, '->', relativeUrl);
-      return relativeUrl;
+    // Replace localhost URLs with the actual backend server
+    const localhostPattern = /^https?:\/\/localhost:(\d+)\//;
+    if (localhostPattern.test(url)) {
+      const fixedUrl = url.replace(localhostPattern, 'http://192.168.1.67:9000/');
+      return fixedUrl;
     }
     return url;
   };
